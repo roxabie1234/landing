@@ -306,6 +306,9 @@
             border: 2px solid var(--ubuntu-orange);
             object-fit: cover;
             box-shadow: 0 0 15px rgba(233, 84, 32, 0.4);
+            pointer-events: none;
+            user-select: none;
+            -webkit-user-drag: none;
         }
 
         .neofetch-info {
@@ -531,7 +534,7 @@
             <!-- System Neofetch Profile -->
             <div class="neofetch-wrapper">
                 <div class="avatar-box no-select">
-                    <img src="avatar.png" alt="roxabie123">
+                    <img src="avatar.png" alt="roxabie123" draggable="false">
                 </div>
                 <div class="neofetch-info">
                     <div class="no-select user-title">roxabie123<span>#ROXVPN</span></div>
@@ -546,11 +549,11 @@
                     </div>
                     <div class="sys-line">
                         <span class="sys-label no-select">Uptime:</span>
-                        <span class="sys-val" id="uptime-counter">99.98% / 2026 Active</span>
+                        <span class="sys-val" id="uptime-counter">99.98%<span class="no-select"> / </span>2026 Active</span>
                     </div>
                     <div class="sys-line">
                         <span class="sys-label no-select">Services:</span>
-                        <span class="sys-val"><span class="badge-ok no-select">[OK] </span>Xray-core, VLESS, XHTTP, gRPC</span>
+                        <span class="sys-val"><span class="badge-ok no-select">[OK] </span>XRAY-Core, VLESS, XHTTP, gRPC</span>
                     </div>
                 </div>
             </div>
@@ -591,12 +594,12 @@
             <!-- Interactive Terminal Prompt -->
             <div class="interactive-shell">
                 <div id="output-log" class="output-log">
-                    <div class="log-row" style="color: var(--text-muted);">Type <span style="color: var(--yellow-bright);">'help'</span> for available interactive commands.</div>
+                    <div class="log-row" style="color: var(--text-muted);">Type<span class="no-select" style="color: var(--yellow-bright);"> 'help' </span>for available interactive commands.</div>
                 </div>
 
                 <div class="input-line">
                     <span class="prompt no-select">roxabie@ubuntu</span><span class="no-select">:</span><span class="path no-select">~</span><span class="no-select">$&nbsp;</span>
-                    <input type="text" id="term-input" class="term-input" autofocus autocomplete="off" spellcheck="false" placeholder="type a command...">
+                    <input type="text" id="term-input" class="term-input" autocomplete="off" spellcheck="false" placeholder="type a command...">
                 </div>
             </div>
 
@@ -612,6 +615,9 @@
     <script>
         // Extended Preloader Logic
         document.addEventListener('DOMContentLoaded', () => {
+            // При загрузке гарантированно прокручиваем страницу в самый верх
+            window.scrollTo(0, 0);
+
             const preloaderCmd = document.getElementById('preloader-cmd');
             const preloaderLogs = document.getElementById('preloader-logs');
             const preloaderCursor = document.getElementById('preloader-cursor');
@@ -657,6 +663,15 @@
                         clearInterval(interval);
                         setTimeout(() => {
                             preloader.classList.add('fade-out');
+                            // Сбрасываем скролл терминала и страницы
+                            window.scrollTo(0, 0);
+                            const body = document.getElementById('term-body');
+                            if (body) body.scrollTop = 0;
+
+                            // Включаем фокус только для ПК (десктопов)
+                            if (window.innerWidth > 768) {
+                                document.getElementById('term-input').focus({ preventScroll: true });
+                            }
                         }, 650);
                     }
                 }, 90);
