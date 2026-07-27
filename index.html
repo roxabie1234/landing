@@ -430,6 +430,17 @@
             word-break: break-all;
         }
 
+        .cmd-image-output {
+            max-width: 260px;
+            width: 100%;
+            border-radius: 8px;
+            border: 1px solid var(--term-border);
+            margin-top: 6px;
+            margin-bottom: 4px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            display: block;
+        }
+
         .input-line {
             display: flex;
             align-items: center;
@@ -526,19 +537,19 @@
                     <div class="no-select user-title">roxabie123<span>#ROXVPN</span></div>
                     <div class="no-select" style="color: var(--text-muted); font-size: 0.75rem; margin-bottom: 8px;">-----------------------------------</div>
                     <div class="sys-line">
-                        <span class="sys-label">OS:</span>
+                        <span class="sys-label no-select">OS:</span>
                         <span class="sys-val">Ubuntu 24.04 LTS x86_64</span>
                     </div>
                     <div class="sys-line">
-                        <span class="sys-label">Location:</span>
+                        <span class="sys-label no-select">Location:</span>
                         <span class="sys-val">Saint-Petersburg<img src="flag_ru.png" width="18" height="18" class="no-select" style="vertical-align: middle; margin-left: 5px"></span>
                     </div>
                     <div class="sys-line">
-                        <span class="sys-label">Uptime:</span>
+                        <span class="sys-label no-select">Uptime:</span>
                         <span class="sys-val" id="uptime-counter">99.98% / 2026 Active</span>
                     </div>
                     <div class="sys-line">
-                        <span class="sys-label">Services:</span>
+                        <span class="sys-label no-select">Services:</span>
                         <span class="sys-val"><span class="badge-ok no-select">[OK] </span>Xray-core, VLESS, XHTTP, gRPC</span>
                     </div>
                 </div>
@@ -584,7 +595,7 @@
                 </div>
 
                 <div class="input-line">
-                    <span class="prompt no-select">roxabie@ubuntu</span class="no-select"><span class="no-select">:</span><span class="path no-select">~</span><span class="no-select">$&nbsp;</span>
+                    <span class="prompt no-select">roxabie@ubuntu</span><span class="no-select">:</span><span class="path no-select">~</span><span class="no-select">$&nbsp;</span>
                     <input type="text" id="term-input" class="term-input" autofocus autocomplete="off" spellcheck="false" placeholder="type a command...">
                 </div>
             </div>
@@ -592,7 +603,6 @@
             <!-- Footer -->
             <div class="term-footer">
                 <div>&copy; 2026 roxabie123.</div>
-                <div>Bot: <a href="https://t.me/roxabievpn_bot/" target="_blank">t.me/roxabievpn_bot</a></div>
             </div>
 
         </div>
@@ -660,23 +670,20 @@
         const outputLog = document.getElementById('output-log');
 
         const COMMANDS = {
-            'help': 'Available commands: <span style="color: var(--yellow-bright);">vpn, telegram, steam, discord, bot, ping, clear, matrix, sudo</span>',
+            'help': 'Available commands: <span style="color: var(--yellow-bright);">vpn, telegram, steam, discord, clear, 67, 123</span>',
             'vpn': 'Redirecting to VPN Bot...',
             'telegram': 'Redirecting to Telegram...',
             'steam': 'Redirecting to Steam Profile...',
             'discord': 'Redirecting to Discord Server...',
-            'bot': 'Opening Telegram VPN Bot: t.me/roxabievpn_bot',
-            'ping': 'PING roxabie.ru (127.0.0.1) 56(84) bytes of data.<br>[OK] 64 bytes from 127.0.0.1: icmp_seq=1 ttl=64 time=0.042 ms',
-            'sudo': '<span style="color: #ff5555;">[Permission Denied] Nice try! You are not in the sudoers file. This incident will be reported.</span>',
-            'matrix': '<span style="color: var(--green-bright);">Wake up, Neo... The Matrix has you. Follow the white rabbit.</span>'
+            '123': '<img src="privet.png" alt="Чайник Maxwell" class="cmd-image-output">',
+            '67': '67 67 67 67 67 67 67 67 67 67 67 67 67 67 67 67 67 67 67 67'
         };
 
         const URL_MAP = {
             'vpn': './vpn',
             'telegram': 'https://t.me/roxabie123',
             'steam': 'https://steamcommunity.com/id/roxabie123',
-            'discord': 'https://discord.gg/gqr3QJVeAh',
-            'bot': 'https://t.me/roxabievpn_bot/'
+            'discord': 'https://discord.gg/gqr3QJVeAh'
         };
 
         input.addEventListener('keydown', (e) => {
